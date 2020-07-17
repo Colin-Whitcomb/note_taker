@@ -8,7 +8,7 @@ var db = [];
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3060;
 
 
 // Sets up the Express app to handle data parsing
@@ -25,7 +25,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/notes", function(req, res) {
-  res.sendFile(path.join(__dirname, "/public/notes.html"));
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
 app.get("/api/notes", function(req, res) {
@@ -35,7 +35,7 @@ app.get("/api/notes", function(req, res) {
 
 // Stores new notes
   // =============================================================
-  app.post("/notes", function(req, res) {
+  app.post("/api/notes", function(req, res) {
     var record = {
       // creates new id 
       id: db.length + Math.floor(Math.random()*100),
