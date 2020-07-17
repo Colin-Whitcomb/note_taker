@@ -30,7 +30,7 @@ app.get("/notes", function(req, res) {
 });
 
 app.get("/api/notes", function(req, res) {
-  res.sendFile(path.join(__dirname, "./db/db.json"));
+  res.sendFile(path.join(__dirname, "./db.json"));
 });
 
 
@@ -48,7 +48,7 @@ app.get("/api/notes", function(req, res) {
     console.log(record);
 
     // updates the db file
-    fs.writeFileSync("./db.db.json", JSON.stringify(db), function(err){
+    fs.writeFileSync("./db.json", JSON.stringify(db), function(err){
       if(err) {
         throw err;
       }
