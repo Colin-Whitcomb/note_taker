@@ -3,7 +3,8 @@
 var express = require("express");
 var path = require("path");
 var fs = require("fs");
-// const { Router } = require("express");
+// var router = require("/route.js");
+// const router  = require("express");
 // const { debugPort } = require("process");
 var db = [];
 
@@ -16,10 +17,26 @@ var PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Routes
+// =============================================================
+
+// Basic route that sends the user first to the AJAX Page
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+app.get("/notes", function(req, res) {
+  res.sendFile(path.join(__dirname, "notes.html"));
+});
+
+app.get("/api/notes", function(req, res) {
+  res.sendFile(path.join(__dirname, "./db/db.json"));
+});
+
 
 // Stores new notes
   // =============================================================
-  router.post("/api/notes", function(req, res) {
+  app.post("/notes", function(req, res) {
     var record = {
       // creates new id 
       id: db.length + Math.floor(Math.random()*100),
@@ -27,7 +44,8 @@ app.use(express.json());
       text: req.body.text
     }
     // pushes the new record into the db array
-    db.push(record)
+    db.push(record);
+    console.log(record);
 
     // updates the db file
     fs.writeFileSync("./db.db.json", JSON.stringify(db), function(err){
@@ -40,7 +58,7 @@ app.use(express.json());
   })
 
 // 
-router.delete("/api/notes/:id", function(req, res){
+app.delete("/api/notes/:id", function(req, res){
   var newArr = [];
   for (let i=0; i < db.length; i++) {
     if(db[i].id !=req.params.id){
