@@ -14,3 +14,4 @@ app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "./db/db.json"));
   });
 
+module.export = route; 
