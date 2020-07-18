@@ -16,23 +16,6 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Routes
-// =============================================================
-
-// Basic route that sends the user first to appropriate HTML pages
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
-});
-
-app.get("/notes", function(req, res) {
-  res.sendFile(path.join(__dirname, "./public/notes.html"));
-});
-
-app.get("/api/notes", function(req, res) {
-  res.sendFile(path.join(__dirname, "./db/db.json"));
-});
-
-
 // Stores new notes
   // =============================================================
   app.post("/api/notes", function(req, res) {
