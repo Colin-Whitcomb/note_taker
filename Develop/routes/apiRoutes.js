@@ -3,10 +3,10 @@
 // We are linking our routes to a series of "data" sources.
 // ===============================================================================
 const create = require("../db/create");
-var notesData = require("../db/db.json");
-var fs = require("fs");
+const notesData = require("../db/db.json");
+const fs = require("fs");
 // const { create  = require("");
-var db = [];
+const db = [];
 // var waitListData = require("../data/waitinglistData");
 
 // ===============================================================================
@@ -27,42 +27,31 @@ module.exports = function (app) {
 
     // when a use creates a new notes 
     app.post("/api/notes", function (req, res) {
-        console.log("Post was called");
-        console.log(record);
-        console.log(req.body);
-        console.log(req.body.title);
-
+      
         // re.body.title & text
-         create.addNotes(req.body.title, req.body.text).then((notes) => res.json(notes))
-         .catch((err) => console.log(err));
-
-
-        // .read()
-        // .write();
+        create.addNotes(req.body.title, req.body.text).then((notes) => res.json(notes))
+            .catch((err) => console.log(err));
+          
 
         // capture the new info
         var record = {
             // creates new id 
-            // id: db.length + Math.floor(Math.random() * 100),
+            id: notesData.length + Math.floor(Math.random() * 100),
             title: req.body.title,
             text: req.body.text
         }
 
-        // pushes the new record into the db array
-        // db.push(record);
+        
 
-        // updates the db file
-        // fs.writeFileSync(notesData, JSON.stringify(db), function (err) {
-        //     if (err) {
-        //         throw err;
-        //     }
-
-        //     // console.log(db);
-        //     // takes the new note in the db array and adds it to the db.json file
-        //     res.json(db);
-        // });
     })
 
+    // var populatepage = () => {
+    //     console.log("pop page was called");
+    //     app.get("/api/notes", function (req, res) {
+    //         res.json(notesData);
+    //         console.log("ntes data" + notesData);
+    //     });
+    // }
     // DELETE note operation
     // app.delete("/api/notes/:id", function (req, res) {
     //     // create a new empty array
@@ -89,3 +78,14 @@ module.exports = function (app) {
 //   waitListData.push(req.body);
 //   res.json(false);
 // }
+
+// updates the db file
+// fs.writeFileSync(notesData, JSON.stringify(db), function (err) {
+//     if (err) {
+//         throw err;
+//     }
+
+//     // console.log(db);
+//     // takes the new note in the db array and adds it to the db.json file
+//     res.json(db);
+// });
