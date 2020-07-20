@@ -1,6 +1,6 @@
 #  Note Taker
 
-### [GitHub](https://github.com/Colin-Whitcomb) Repository Link
+### [Deployed](https://boiling-eyrie-32722.herokuapp.com/notes) Site
 
  <p align="center">
  Final Product Preview
