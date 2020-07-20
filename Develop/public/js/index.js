@@ -59,11 +59,11 @@ var handleNoteSave = function() {
 
   saveNote(newNote).then(function(data) {
     console.log("Saved noted");
-    // getAndRenderNotes();console.log("Get / Render noted");
+    getAndRenderNotes();console.log("Get / Render noted");
     renderActiveNote();
     // console.log("Saved noted");
   });
-  getAndRenderNotes();console.log("Get / Render noted");
+  // getAndRenderNotes();console.log("Get / Render noted");
 };
 
 // Delete the clicked note

@@ -27,7 +27,7 @@ class Create {
             } catch (err) {
                 parseNotes = [];
             }
-            // console.log(parseNotes);
+            // console.log("Parse notes:" +parseNotes);
             return parseNotes;
           
         });
@@ -47,6 +47,7 @@ class Create {
         .then((notes) => [...notes, newNote])
         .then((updateNotes) => this.write(updateNotes))
         .then(() => (newNote))
+        
     
     }
     
