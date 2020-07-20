@@ -27,7 +27,7 @@ class Create {
             } catch (err) {
                 parseNotes = [];
             }
-            // console.log("Parse notes:" +parseNotes);
+            console.log("Parse notes:" +parseNotes.id);
             return parseNotes;
           
         });
@@ -51,9 +51,13 @@ class Create {
     
     }
     
-    removeNote(title) {
+    removeNote(id) {
+        console.log("removeNote(create) id " + id);
+        console.log(5 === JSON.parse(id));
+        var parsedId = JSON.parse(id);
+
         return this.getNotes()
-        .then((notes) => notes.filter((note) => note.title !== title))
+        .then((notes) => notes.filter((note) => note.id !== parsedId))
         .then((filteredNotes) => this.write(filteredNotes));
     }
    

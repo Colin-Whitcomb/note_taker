@@ -12,20 +12,21 @@ const db = [];
 // ===============================================================================
 // ROUTING
 // ===============================================================================
-
 module.exports = function (app) {
     // API GET Requests
     // ---------------------------------------------------------------------------
 
     // When the user inputs /api/notes, they will be returned the db.json information.
     app.get("/api/notes", function (req, res) {
-        console.log("I am app.get");
-       create
-       .getNotes()
-       .then(function (notes){
-           console.log(notes);
-           return res.json(notes)
-       })
+        // console.log("I am app.get");
+        create
+            .getNotes()
+            .then(function (notes) {
+                // console.log(notes);
+                return res.json(notes)
+            })
+
+        // console.log("Notes data: " + notesData[0].id);
         // res.json(notesData);
     });
 
@@ -36,76 +37,72 @@ module.exports = function (app) {
     // when a use creates a new notes 
     app.post("/api/notes", function (req, res) {
 
+
         // Added notes to db.json
         create
-        .addNotes(req.body.title, req.body.text)
-        .then((notes) => res.json(notes))
-        .catch((err) => console.log(err));
-
+            .addNotes(req.body.title, req.body.text)
+            .then((notes) => res.json(notes))
+            .catch((err) => console.log(err));
+        console.log("added notes, req.body.title: " + req.body.title);
     });
 
-    // // capture the new info
-    // var record = {
-    //     // creates new id 
-    //     id: notesData.length + Math.floor(Math.random() * 100),
-    //     title: req.body.title,
-    //     text: req.body.text
-    // }
 
-    // app.post("/api/notes", function (req, res) {
-    //     var reqBody = req.body;
-    //     var notes = fs.readFileSync("./db/db.json");
-    //     reqBody.id = String(notes.length);
-    //     notes = JSON.parse(notes);
-    //     notes.push(reqBody);
-    //     fs.writeFileSync("./db/db.json", JSON.stringify(notes));
-    //     res.json(notes);
-    // })
+    // ---------------------------------------------------------------------------
+    // Displays a single character, or shows "No character found"
+    app.get("/api/notes/:id", function (req, res) {
 
-    // var populatepage = () => {
-    //     console.log("pop page was called");
-    //     app.get("/api/notes", function (req, res) {
-    //         res.json(notesData);
-    //         console.log("ntes data" + notesData);
-    //     });
-    // }
-    // DELETE note operation
-    app.delete("/api/notes/:id", function (req, res) {
-        // create a new empty array
-        var newArr = [];
-        // loop through all items currently in the db array
-        for (let i = 0; i < db.length; i++) {
-            // for every item that is NOT the note that the user has chosen
-            if (db[i].id != req.params.id) {
-                // push every other item into this new array
-                newArr.push(db[i]);
-            }
+        // var notesDataString = JSON.stringify(notesData);
+        // console.log("Notes Data:" + notesDataString);
+
+        // console.log("Hello Query", query)
+        // Grab the selected parameter
+        var chosen = req.params.id;
+        console.log("chosen.id: " + chosen);
+        // console.log(chosen === "3");
+
+        // Filter to show only the selected character
+        for (var i = 0; i < notesData.length; i++) {
+            console.log("notesData: " + JSON.stringify(notesData[i].id));
+            console.log("chosen in for: " + chosen);
+            console.log(chosen === JSON.stringify(notesData[i].id));
+            if (chosen === JSON.stringify(notesData[i].id)) {
+                console.log("if has been chosen");
+                return res.json(notesData[i]);
+            } 
         }
     });
+    // DELETE note operation
+    app.delete("/api/notes/:id", function (req, res) {
+        console.log("delete was called");
+        console.log("req bod id " + req.params.id);
+        create
+            .removeNote(req.params.id)
+            .then(function (notes) {
+                // console.log(notes);
+                return res.json(notes)
+
+            })
+    })
 }
 
-// })
 
 
 
+//  // create a new empty array
+//  var newArr = [];
+//  // loop through all items currently in the db array
+//  for (let i = 0; i < db.length; i++) {
+//      // for every item that is NOT the note that the user has chosen
+//      if (db[i].id != req.params.id) {
+//          // push every other item into this new array
+//          newArr.push(db[i]);
+//      }
+//  }
 
-
-// if (tableData.length < 5) {
-//   tableData.push(req.body);
-//   res.json(true);
+// // capture the new info
+// var record = {
+//     // creates new id 
+//     id: notesData.length + Math.floor(Math.random() * 100),
+//     title: req.body.title,
+//     text: req.body.text
 // }
-// else {
-//   waitListData.push(req.body);
-//   res.json(false);
-// }
-
-// updates the db file
-// fs.writeFileSync(notesData, JSON.stringify(db), function (err) {
-//     if (err) {
-//         throw err;
-//     }
-
-//     // console.log(db);
-//     // takes the new note in the db array and adds it to the db.json file
-//     res.json(db);
-// });
