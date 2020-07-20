@@ -27,16 +27,15 @@ class Create {
             } catch (err) {
                 parseNotes = [];
             }
-            console.log("Parse notes:" +parseNotes.id);
+            // console.log("Parse notes:" +parseNotes.id);
             return parseNotes;
           
         });
     }
 
     addNotes(title, text) {
-
         const newNote = { 
-            id: notesData.length,
+            id: Math.random(),
             title: title,
             text: text, };
         if (!title || !text){
@@ -52,13 +51,12 @@ class Create {
     }
     
     removeNote(id) {
-        console.log("removeNote(create) id " + id);
-        console.log(5 === JSON.parse(id));
+  
         var parsedId = JSON.parse(id);
 
         return this.getNotes()
         .then((notes) => notes.filter((note) => note.id !== parsedId))
-        .then((filteredNotes) => this.write(filteredNotes));
+        .then((filteredNotes) => this.write(filteredNotes))
     }
    
 }

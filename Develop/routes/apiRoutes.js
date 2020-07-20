@@ -48,7 +48,7 @@ module.exports = function (app) {
 
 
     // ---------------------------------------------------------------------------
-    // Displays a single character, or shows "No character found"
+    // Displays a single note
     app.get("/api/notes/:id", function (req, res) {
 
         // var notesDataString = JSON.stringify(notesData);
@@ -68,41 +68,19 @@ module.exports = function (app) {
             if (chosen === JSON.stringify(notesData[i].id)) {
                 console.log("if has been chosen");
                 return res.json(notesData[i]);
-            } 
+            }
         }
     });
     // DELETE note operation
     app.delete("/api/notes/:id", function (req, res) {
         console.log("delete was called");
         console.log("req bod id " + req.params.id);
-        create
-            .removeNote(req.params.id)
-            .then(function (notes) {
-                // console.log(notes);
-                return res.json(notes)
 
-            })
+        create
+        .removeNote(req.params.id)
+        .then((notes) => res.json(notes))
+           
     })
 }
 
 
-
-
-//  // create a new empty array
-//  var newArr = [];
-//  // loop through all items currently in the db array
-//  for (let i = 0; i < db.length; i++) {
-//      // for every item that is NOT the note that the user has chosen
-//      if (db[i].id != req.params.id) {
-//          // push every other item into this new array
-//          newArr.push(db[i]);
-//      }
-//  }
-
-// // capture the new info
-// var record = {
-//     // creates new id 
-//     id: notesData.length + Math.floor(Math.random() * 100),
-//     title: req.body.title,
-//     text: req.body.text
-// }

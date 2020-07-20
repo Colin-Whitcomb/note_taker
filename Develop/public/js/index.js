@@ -25,10 +25,10 @@ var saveNote = function(note) {
 };
 
 // A function for deleting a note from the db
-var deleteNote = function(id) {
-  console.log("delete note ajx called " + id);
+var deleteNote = function(note) {
+  console.log("delete note ajx called " + note.id);
   return $.ajax({
-    url: "api/notes/" + id,
+    url: "api/notes/" + note.id,
     method: "DELETE"
   });
 };
@@ -84,13 +84,15 @@ var handleNoteDelete = function(event) {
     activeNote = {};
   }
 
-  
-  deleteNote(note.id).then(function() {
-    console.log("deleteNote was called");
-    console.log("delete note id:" + note.id);
+
+  deleteNote(note).then((console.log("please")), function() {
+    console.log("then was called");
+    // console.log("delete note id:" + note.id);
     getAndRenderNotes();
+    console.log("getAndRenderNotes was called");
     renderActiveNote();
-  });
+    console.log("renderActiveNote was called");
+  }).then(console.log("huh???"));
   // getAndRenderNotes();
 };
 
