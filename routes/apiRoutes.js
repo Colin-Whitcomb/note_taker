@@ -1,7 +1,10 @@
 
 // LOAD DATA
 // ===============================================================================
+
+// Accepts Create class 
 const create = require("../db/create");
+// Accepts the db info
 const notesData = require("../db/db.json");
 
 // ROUTING
@@ -27,7 +30,6 @@ module.exports = function (app) {
 
     // when a use creates a new notes 
     app.post("/api/notes", function (req, res) {
-
 
         // Added notes to db.json
         create
