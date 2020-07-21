@@ -1,8 +1,7 @@
 var fs = require('fs');
 var util = require('util');
 const notesData = require("./db.json");
-// const { parse } = require('path');
-// var uniqid = require('uniqid');
+
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -18,7 +17,7 @@ class Create {
     }
 
     getNotes() {
-        // console.log("get notes was called.")
+    
        
         return this.read().then((notes) => { 
             var parseNotes;
@@ -27,7 +26,7 @@ class Create {
             } catch (err) {
                 parseNotes = [];
             }
-            // console.log("Parse notes:" +parseNotes.id);
+           
             return parseNotes;
           
         });
@@ -41,7 +40,7 @@ class Create {
         if (!title || !text){
             throw error;
         } 
-        // console.log(newNote);
+     
         return this.getNotes()
         .then((notes) => [...notes, newNote])
         .then((updateNotes) => this.write(updateNotes))

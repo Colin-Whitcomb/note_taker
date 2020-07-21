@@ -64,7 +64,7 @@ module.exports = function (app) {
         create
         .removeNote(req.params.id)
         .then((notes) => res.json(notes))
-           
+         
     })
 }
 
