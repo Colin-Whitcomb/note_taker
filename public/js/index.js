@@ -35,9 +35,13 @@ var deleteNote = function(note) {
 
 // If there is an activeNote, display it, otherwise render empty inputs
 var renderActiveNote = function() {
+  console.log("renderActiveNote was called");
   $saveNoteBtn.hide();
 
   if (activeNote.id) {
+    console.log(activeNote.id);
+    console.log(activeNote.title);
+    console.log(activeNote.text);
     $noteTitle.attr("readonly", true);
     $noteText.attr("readonly", true);
     $noteTitle.val(activeNote.title);
@@ -98,12 +102,15 @@ var handleNoteDelete = function(event) {
 
 // Sets the activeNote and displays it
 var handleNoteView = function() {
+  console.log("handleNoteView called");
   activeNote = $(this).data();
+  console.log(activeNote.id);
   renderActiveNote();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeNote to an empty object and allows the user to enter a new note
 var handleNewNoteView = function() {
+  console.log("handleNewNoteView called");
   activeNote = {};
   renderActiveNote();
 };
@@ -147,10 +154,10 @@ var getAndRenderNotes = function() {
   });
 };
 
-$saveNoteBtn.on("click", handleNoteSave, console.log("Click!"));
+$saveNoteBtn.on("click", handleNoteSave);
 $noteList.on("click", ".list-group-item", handleNoteView);
 $newNoteBtn.on("click", handleNewNoteView);
-$noteList.on("click", ".delete-note", handleNoteDelete, console.log("Click!"));
+$noteList.on("click", ".delete-note", handleNoteDelete);
 $noteTitle.on("keyup", handleRenderSaveBtn);
 $noteText.on("keyup", handleRenderSaveBtn);
 

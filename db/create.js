@@ -1,6 +1,6 @@
 var fs = require('fs');
 var util = require('util');
-const notesData = require("../db/db.json");
+const notesData = require("./db.json");
 // const { parse } = require('path');
 // var uniqid = require('uniqid');
 
