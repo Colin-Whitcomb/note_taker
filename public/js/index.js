@@ -26,7 +26,6 @@ var saveNote = function(note) {
 
 // A function for deleting a note from the db
 var deleteNote = function(note) {
-  console.log("delete note ajx called " + note.id);
   return $.ajax({
     url: "api/notes/" + note.id,
     method: "DELETE"
@@ -35,13 +34,9 @@ var deleteNote = function(note) {
 
 // If there is an activeNote, display it, otherwise render empty inputs
 var renderActiveNote = function() {
-  console.log("renderActiveNote was called");
   $saveNoteBtn.hide();
 
   if (activeNote.id) {
-    console.log(activeNote.id);
-    console.log(activeNote.title);
-    console.log(activeNote.text);
     $noteTitle.attr("readonly", true);
     $noteText.attr("readonly", true);
     $noteTitle.val(activeNote.title);
@@ -63,26 +58,21 @@ var handleNoteSave = function() {
   };
 
   saveNote(newNote).then(function(data) {
-    console.log("Saved noted");
     getAndRenderNotes();console.log("Get / Render noted");
     renderActiveNote();
-    // console.log("Saved noted");
   });
-  // getAndRenderNotes();console.log("Get / Render noted");
 };
 
 // Delete the clicked note
 var handleNoteDelete = function(event) {
   console.log("handleNoteDelete called");
-  // console.log('event ' + event);
+ 
   // prevents the click listener for the list from being called when the button inside of it is clicked
   event.stopPropagation();
 
   var note = $(this)
   .parent(".list-group-item")
   .data();
-  // console.log("note: " + note);
-  console.log("active note id:" + note.id);
 
   if (activeNote.id === note.id) {
     activeNote = {};
@@ -91,26 +81,21 @@ var handleNoteDelete = function(event) {
 
   deleteNote(note).then((console.log("please")), function() {
     console.log("then was called");
-    // console.log("delete note id:" + note.id);
+
     getAndRenderNotes();
-    console.log("getAndRenderNotes was called");
     renderActiveNote();
-    console.log("renderActiveNote was called");
+  
   }).then(console.log("huh???"));
-  // getAndRenderNotes();
 };
 
 // Sets the activeNote and displays it
 var handleNoteView = function() {
-  console.log("handleNoteView called");
   activeNote = $(this).data();
-  console.log(activeNote.id);
   renderActiveNote();
 };
 
 // Sets the activeNote to an empty object and allows the user to enter a new note
 var handleNewNoteView = function() {
-  console.log("handleNewNoteView called");
   activeNote = {};
   renderActiveNote();
 };
