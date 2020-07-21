@@ -1,24 +1,26 @@
+// Node requires
 var fs = require('fs');
 var util = require('util');
-const notesData = require("./db.json");
 
-
+// make sure that read/writeFile are promisified
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
-
+// class constructor
 class Create {
 
+    // promisified readFile function
     read() {
         return readFileAsync("db/db.json", "UTF-8");
     }
+    // promisified writeFile function
     write(note) {
         return writeFileAsync("db/db.json", JSON.stringify(note));
     }
 
+    // Get notes that are in db and parse them 
     getNotes() {
     
-       
         return this.read().then((notes) => { 
             var parseNotes;
             try {
@@ -32,6 +34,7 @@ class Create {
         });
     }
 
+    // Add new note and attribute with new ID
     addNotes(title, text) {
         const newNote = { 
             id: Math.random(),
@@ -48,9 +51,10 @@ class Create {
         
     
     }
-    
+
+    // Remove note with associated ID
     removeNote(id) {
-  
+        
         var parsedId = JSON.parse(id);
 
         return this.getNotes()
@@ -60,4 +64,5 @@ class Create {
    
 }
 
+// export this Create class
 module.exports = new Create();
