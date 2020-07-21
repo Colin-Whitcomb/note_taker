@@ -1,6 +1,6 @@
 #  Note Taker
 
-### [Deployed](https://boiling-eyrie-32722.herokuapp.com/notes) Site
+### [Deployed](https://boiling-eyrie-32722.herokuapp.com/) Site
 
  <p align="center">
  Final Product Preview
